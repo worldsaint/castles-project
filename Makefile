@@ -4,13 +4,15 @@ SRCDIR = src
 CC = javac
 CFLAGS =
 
-$(CDIR)/%.class: 
+Main.class: $(CDIR) $(CDIR)/%.class
+	$(CC) Main.java -cp $(CDIR) -d $(CDIR)
+
+$(CDIR)/%.class: $(CDIR) 
 	$(CC) $(SRCDIR)/*.java -d $(CDIR) $(CFLAGS)
 
-Main.class: $(CDIR)/%.class
-	$(CC) Main.java -cp $(CDIR) -d $(CDIR)
+$(CDIR):
+	mkdir $(CDIR)
 
 clean:
 	rm $(CDIR)/*.class
-	rm *.class
-	rm $(CDIR)/*~ *~	
+
